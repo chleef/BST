@@ -13,8 +13,10 @@ class BST {
     public:
         BST();
         BST(int);
+        ~BST();
         BST* insert(BST*, int);
         BST* search(BST*, int);
+        BST* remove(BST*, int);
         void setNum(int);
         unsigned getTraversal();
 };
@@ -60,6 +62,23 @@ BST* BST::search(BST* root, int find) {
     }
 }
 
+BST* BST::remove(BST* root, int num) {
+    if(root == NULL) //bottom of tree, haven't found num
+        return NULL;
+    else if(root->num == num){ //found it - time to remove
+        //deal with the different cases
+        //if we're at the leaf, good to remove
+        //else if we only have one child we just have to connect those
+        //else if we have a bunch of crap to deal with
+    }
+    else if(num > root->num) { //need to go to the right
+        root->right = remove(root->right, num);
+    }
+    else { //need to go left
+        root->left = remove(root->left, num);
+    }
+    return root;
+}
 
 void BST::setNum(int num){
     this->num = num;
