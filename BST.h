@@ -17,8 +17,10 @@ class BST {
         BST* insert(BST*, int);
         BST* search(BST*, int);
         BST* remove(BST*, int);
+        void display(BST*);
         void setNum(int);
         unsigned getTraversal();
+
 };
 
 //default constructor
@@ -32,6 +34,10 @@ BST::BST(int num) {
     this->num = num;
     left = NULL;
     right = NULL;
+}
+
+BST::~BST() {
+    
 }
 
 //insert method
@@ -78,6 +84,17 @@ BST* BST::remove(BST* root, int num) {
         root->left = remove(root->left, num);
     }
     return root;
+}
+
+void BST::display(BST* root) {
+    if(root == NULL) //done
+        return;
+
+    cout << root->num << " ";
+
+    display(root->left);
+
+    display(root->right);
 }
 
 void BST::setNum(int num){
