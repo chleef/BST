@@ -9,11 +9,14 @@ int main(int argc, char *argv[]) {
 
         BST tree;
         BST* root = NULL;
-        tree.insert(root, 50);
+        root = tree.insert(root, 50);
         tree.insert(root, 30);
+        //tree.insert(root, 40);
         tree.insert(root, 20);
-        tree.insert(root, 40);
         tree.insert(root, 70);
+        tree.insert(root, 60);
+        tree.insert(root, 80);
+
 
         tree.display(root);
 
@@ -23,4 +26,5 @@ int main(int argc, char *argv[]) {
         cout << "exception caught in main: " << e.what() << endl;
     }
     cout << "end of main " << endl;
+    return 0;
 }

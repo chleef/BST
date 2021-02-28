@@ -37,19 +37,22 @@ BST::BST(int num) {
 }
 
 BST::~BST() {
-    
+    delete left;
+    delete right;
 }
 
 //insert method
 BST* BST::insert(BST* root, int val) {
-    if(root == NULL){ //tree is empty
-       // cout << "tree is empty" << endl;
+    if(!root){ //tree is empty
+        //cout << "root is NULL, adding: "<< val << endl;
         return new BST(val);
     }
     else if(val > root->num) { //need to go down the right side
+        //cout << "val greater than root's, go right" << endl;
         root->right = insert(root->right, val); //recursive call - start insert method over 
     }
     else {
+        //cout << "val less than root's, go left" << endl;
         root->left = insert(root->left, val); //recursive call - start insert over down the left side
     }
     return root;
@@ -87,14 +90,17 @@ BST* BST::remove(BST* root, int num) {
 }
 
 void BST::display(BST* root) {
-    if(root == NULL) //done
+   // cout << "in display" << endl;
+    if(root == NULL ) //done
         return;
 
-    cout << root->num << " ";
+    cout << "[";
+    cout << root->num;
 
     display(root->left);
-
+    cout << "]";
     display(root->right);
+    cout << "]";
 }
 
 void BST::setNum(int num){
