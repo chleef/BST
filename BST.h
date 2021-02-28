@@ -77,8 +77,19 @@ BST* BST::remove(BST* root, int num) {
     else if(root->num == num){ //found it - time to remove
         //deal with the different cases
         //if we're at the leaf, good to remove
+        if(root->left == NULL && root->right == NULL)
+            root = NULL;
         //else if we only have one child we just have to connect those
-        //else if we have a bunch of crap to deal with
+        else if(root->left == NULL && root->right != NULL) {
+            root = root->right;
+        }
+        else if(root->left != NULL && root->right == NULL) {
+            root = root->left;
+        }
+        //else if we have a bunch of crap to deal with - two children
+        else {
+            
+        }
     }
     else if(num > root->num) { //need to go to the right
         root->right = remove(root->right, num);
@@ -91,14 +102,20 @@ BST* BST::remove(BST* root, int num) {
 
 void BST::display(BST* root) {
    // cout << "in display" << endl;
-    if(root == NULL ) //done
+    if(root == NULL ) {//done
+        cout << "[";
         return;
-
+    }
     cout << "[";
     cout << root->num;
 
+    if(root->left == NULL && root->right == NULL) {
+        return;
+    }
+
     display(root->left);
     cout << "]";
+   // cout << "[";
     display(root->right);
     cout << "]";
 }

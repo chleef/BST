@@ -19,7 +19,17 @@ int main(int argc, char *argv[]) {
 
 
         tree.display(root);
+        cout << endl;
 
+        tree.remove(root, 30);
+
+        tree.display(root);
+        cout << endl;
+
+        tree.remove(root, 80);
+
+        tree.display(root);
+        cout << endl;
 
     }
     catch(exception e){
