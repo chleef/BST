@@ -88,7 +88,17 @@ BST* BST::remove(BST* root, int num) {
         }
         //else if we have a bunch of crap to deal with - two children
         else {
+            //find the smallest number from the right side
+            BST* temp = root->right;
+
+            while(temp && temp->left != NULL)
+                temp = temp->left;
             
+            //set the one we want to remove equal to that number
+            root->num = temp->num;
+
+            //get rid of old temp
+            root->right = remove(root->right, temp->num);
         }
     }
     else if(num > root->num) { //need to go to the right

@@ -11,11 +11,15 @@ int main(int argc, char *argv[]) {
         BST* root = NULL;
         root = tree.insert(root, 50);
         tree.insert(root, 30);
-        //tree.insert(root, 40);
+        tree.insert(root, 40);
         tree.insert(root, 20);
         tree.insert(root, 70);
         tree.insert(root, 60);
         tree.insert(root, 80);
+        tree.insert(root, 45);
+        tree.insert(root, 46);
+        tree.insert(root, 44);
+        tree.insert(root, 35);
 
 
         tree.display(root);
