@@ -3,6 +3,23 @@
 
 int main(int argc, char *argv[]) {
     try{
+/*
+        BST tree;
+        BST* root = NULL;
+
+        root = tree.insert(root, 1);
+        for(int i = 2; i < 16; i++)
+            tree.insert(root, i);
+
+        tree.display(root);
+        cout << endl;
+
+        tree.search(root, 5);
+
+        tree.display(root);
+        cout << endl;
+*/
+        auto start = chrono::steady_clock::now();
 
         ifstream File;
 
@@ -15,72 +32,73 @@ int main(int argc, char *argv[]) {
         BST tree;
         BST* root = NULL;
         int hold;
-        string throwaway;
+        string holdString;
+        stringstream ss;
 
         File >> hold;
         root = tree.insert(root, hold);
 
-        while(File >> hold) {
-            cout << "hold is: " << hold << endl;
-            tree.insert(root, hold);
+        getline(File, holdString);
+
+        //cout << "holdString is: " << holdString << endl;
+
+        ss << holdString;
+
+        while(!ss.eof()) {
+            ss >> hold;
+        //    cout << "hold is: " << hold << endl;
+            if(hold != -1)
+                tree.insert(root, hold);
+            hold = -1;
         }
         
-        cout << "hold is now: " << endl;
+        //cout << "hold is now: " << endl;
         
+        getline(File, holdString);
+        //cout << "holdString is now: " << holdString << endl;
+
         tree.display(root);
         cout << endl;
         
-        char throwaway2;
-        File >> throwaway2;
-        cout << "throwaway2: " << throwaway2 << endl;
-        getline(File, throwaway);
-        cout << "throwaway: " << throwaway << endl;
-        getline(File, throwaway);
-        cout << "throwaway: " << throwaway << endl;
-        getline(File, throwaway);
-        cout << "throwaway: " << throwaway << endl;
-        getline(File, throwaway);
-        cout << "throwaway: " << throwaway << endl;
+        getline(File, holdString);
 
-        while(File >> hold) {
-            cout << "in search while, searching for: " << hold << endl;
-            tree.search(root, hold);
-        }
+       // cout << "holdString is: " << holdString << endl;
+        stringstream ss2;
+        ss2 << holdString;
 
-        tree.display(root);
-        cout << endl;
-
-        File >> throwaway;
-        File >> throwaway;
-        
-        while(File >> hold) {
-            cout << "in remove while, removing: " << hold << endl;
-            tree.remove(root, hold);
+        while(!ss2.eof()) {
+            ss2 >> hold;
+        //    cout << "in search while, searching for: " << hold << endl;
+            if(hold != -1)
+                tree.search(root, hold);
+            hold = -1;
         }
 
         tree.display(root);
         cout << endl;
-/*
-        tree.insert(root, 30);
-        tree.insert(root, 40);
-        tree.insert(root, 20);
-        tree.insert(root, 70);
-        tree.insert(root, 60);
-        tree.insert(root, 80);
-        tree.insert(root, 45);
-        tree.insert(root, 46);
-        tree.insert(root, 44);
-        tree.insert(root, 35);
-*/
+        getline(File, holdString);
+        //cout << "holdString is: " << holdString << endl;
 
+        getline(File, holdString);
+        //cout << "holdString is: " << holdString << endl;
+        stringstream ss3;
+        ss3 << holdString;
+        
+        while(!ss3.eof()) {
+            ss3 >> hold;
+        //    cout << "in remove while, removing: " << hold << endl;
+            if(hold != -1)
+                tree.remove(root, hold);
+            hold = -1;
+        }
 
+        tree.display(root);
+        cout << endl;
 
-       // tree.remove(root, 30);
+        auto end = chrono::steady_clock::now();
 
-
-      //  tree.remove(root, 80);
-
-
+        cout << "traversal count: " << tree.getTraversal() << endl;
+        cout << "total time for program (ns): " << chrono::duration_cast<chrono::nanoseconds>(end - start).count() << endl;
     }
     catch(exception e){
         cout << "exception caught in main: " << e.what() << endl;
