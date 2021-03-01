@@ -1,11 +1,17 @@
-#include "BST.h"
-
-
-using namespace std;
+#include "main.h"
 
 
 int main(int argc, char *argv[]) {
     try{
+
+        ifstream File;
+
+        if(argc < 2)
+            cout << "need file argument" << endl;
+        
+        File.open(argv[1]);
+    
+
 
         BST tree;
         BST* root = NULL;

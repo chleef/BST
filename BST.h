@@ -43,6 +43,8 @@ BST::~BST() {
 
 //insert method
 BST* BST::insert(BST* root, int val) {
+    //increment traversal
+    traversal++;
     if(!root){ //tree is empty
         //cout << "root is NULL, adding: "<< val << endl;
         return new BST(val);
@@ -59,6 +61,8 @@ BST* BST::insert(BST* root, int val) {
 }
 
 BST* BST::search(BST* root, int find) {
+    //once again just up here?
+    traversal++;
     if(root == NULL)
         return NULL;
     else if(root->num == find) 
@@ -72,6 +76,8 @@ BST* BST::search(BST* root, int find) {
 }
 
 BST* BST::remove(BST* root, int num) {
+    //assuming I increment traveral up here:
+    traversal++;
     if(root == NULL) //bottom of tree, haven't found num
         return NULL;
     else if(root->num == num){ //found it - time to remove
