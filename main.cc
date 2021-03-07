@@ -56,7 +56,7 @@ int main(int argc, char *argv[]) {
         
         getline(File, holdString);
         //cout << "holdString is now: " << holdString << endl;
-
+        cout << "Initial tree: " << endl;
         tree.display(root);
         cout << endl;
         
@@ -74,7 +74,7 @@ int main(int argc, char *argv[]) {
             hold = -1;
         }
 
-        tree.display(root);
+        //tree.display(root);
         cout << endl;
         getline(File, holdString);
         //cout << "holdString is: " << holdString << endl;
@@ -92,6 +92,7 @@ int main(int argc, char *argv[]) {
             hold = -1;
         }
 
+        cout << "Final tree structure:" << endl;
         tree.display(root);
         cout << endl;
 
@@ -103,6 +104,6 @@ int main(int argc, char *argv[]) {
     catch(exception e){
         cout << "exception caught in main: " << e.what() << endl;
     }
-    cout << "end of main " << endl;
+    //cout << "end of main " << endl;
     return 0;
 }

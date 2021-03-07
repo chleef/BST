@@ -26,12 +26,14 @@ class BST {
 //default constructor
 BST::BST() {
     num = 0;
+    traversal = 0;
     left = NULL;
     right = NULL;
 }
 
 BST::BST(int num) {
     this->num = num;
+    traversal = 0;
     left = NULL;
     right = NULL;
 }
@@ -97,8 +99,10 @@ BST* BST::remove(BST* root, int num) {
             //find the smallest number from the right side
             BST* temp = root->right;
 
-            while(temp && temp->left != NULL)
+            while(temp && temp->left != NULL) {
                 temp = temp->left;
+               // traversal++;
+            }
             
             //set the one we want to remove equal to that number
             root->num = temp->num;
