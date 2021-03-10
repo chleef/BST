@@ -15,6 +15,9 @@ class Splay{
         Node* root;
         unsigned traversal;
 
+        void splay(Node*);
+        void rotateLeft(Node*);
+        void rotateRight(Node*);
     public:
         Splay();
         ~Splay();
@@ -23,9 +26,20 @@ class Splay{
         Node* remove(Node*, int);
         void display(Node*);
         unsigned getTraversal();
+        Node* getRoot();
         void clear(Node*);
 
 };
+
+void Splay::splay(Node* splayNode){
+    //check if it just needs a zig
+
+    //check which of the 4 possibilities its in
+    //zig zig from left -- rotate left twice?
+    //zig zag
+    //zig zig from right
+    //zig zag otherway
+}
 
 //default constructor
 Splay::Splay() {
@@ -65,7 +79,7 @@ void Splay::insert(int val) {
     else
         follower->left = newNode;
 
-    //then SPLAY
+    //then SPLAY***************************************************************
     
 } //end insert
 
@@ -73,7 +87,7 @@ void Splay::insert(int val) {
 Node* Splay::search(Node* root, int find) {
     traversal++;
     if(root == NULL) {
-        //need to splay - got to the bottom
+        //need to splay the parent?- got to the bottom
         return NULL;
     }
     else if(root->num == find) {
@@ -115,4 +129,8 @@ void Splay::display(Node* root){
 
 unsigned Splay::getTraversal(){
     return traversal;
+}
+
+Node* Splay::getRoot(){
+    return this->root;
 }
