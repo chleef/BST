@@ -39,17 +39,29 @@ void Splay::splay(Node* splayNode){
         if(splayNode->parent->parent == NULL) { //just need to zig
             //figure out left vs right rotate
         }
-        else if(splayNode->parent->left == splayNode && splayNode->parent->parent->left == splayNode->parent){
-            //aka case 1 zig zig from the left - need to right rotate twice
+        else if(splayNode->parent->left == splayNode){
+            if(splayNode->parent->parent->left == splayNode->parent) {
+                //aka case 1 zig zig from the left - need to right rotate twice
+                rotateRight(splayNode->parent->parent);
+                rotateRight(splayNode->parent);
+            }
+            else {
+                 //aka case 2 zig zag - first right then left
+                rotateRight(splayNode->parent);
+                rotateLeft(splayNode->parent);
+            }
         }
-        else if(splayNode->parent->left == splayNode && splayNode->parent->parent->right == splayNode->parent){
-            //aka case 2 zig zag - first right then left
-        }
-        else if(splayNode->parent->right == splayNode && splayNode->parent->parent->left == splayNode->parent){
+        else if(splayNode->parent->right == splayNode){
+            if(splayNode->parent->parent->left == splayNode->parent){
             //case 3 - zig zag first left then right
-        }
-        else if(splayNode->parent->right == splayNode && splayNode->parent->parent->right == splayNode->parent){
-            //aka case 4 zig zig from the right - need to right rotate twice
+                rotateLeft(splayNode->parent);
+                rotateRight(splayNode->parent);
+            }
+            else {
+                 //aka case 4 zig zig from the right - need to left rotate twice
+                rotateLeft(splayNode->parent->parent);
+                rotateLeft(splayNode->parent);
+            }
         }
         else {
             cout << "oops should not be in here in splay - messed up some pointer" << endl;
@@ -61,7 +73,23 @@ void Splay::splay(Node* splayNode){
 
 //rotateLeft
 void Splay::rotateLeft(Node* node){
+    Node* oldParent = node->parent;
+    Node* rightNode = node->right;
+    node->right = rightNode->left;
 
+    if(rightNode->left != NULL)
+        rightNode->left->parent = node;
+    
+    rightNode->parent = oldParent;
+    if(oldParent == NULL)
+        this->root = rightNode;
+    else if(oldParent->right == node)
+        oldParent->right = rightNode;
+    else
+        oldParent->left = rightNode;
+
+    rightNode->left = node;
+    node->parent = rightNode;
 }
 
 //rotateRight
@@ -82,6 +110,7 @@ void Splay::rotateRight(Node* node){
         oldParent->right = leftNode;
     else
         oldParent->left = leftNode;
+
     leftNode->right = node;
     node->parent = leftNode;
 }
