@@ -18,7 +18,7 @@ class Splay{
     public:
         Splay();
         ~Splay();
-        Node* insert(Node*, int);
+        void insert(int);
         Node* search(Node*, int);
         Node* remove(Node*, int);
         void display(Node*);
@@ -39,13 +39,34 @@ Splay::~Splay() {
 }
 
 //insert method
-Node* Splay::insert(Node* root, int val) {
+void Splay::insert(int val) {
     traversal++;
-    Node* node = new Node;
-    if(!this->root){
-        //splay tree is empty
-        
-    }
+    Node* mover = this->root;
+    Node* follower = NULL;
+    Node* newNode = new Node;
+    newNode->parent = newNode->left = newNode->right = NULL;
+    newNode->num = val;
+    while(mover != NULL){
+        //move mover down to wherever newNode should be inserted, keep follower trailing
+        follower = mover;
+        if(newNode->num > mover->num){
+            mover = mover->right;
+        }
+        else {
+            mover = mover->left;
+        }
+    } //end while - once mover is Null we are where we want to be
+    newNode->parent = follower;
+
+    if(follower == NULL) //we have nothing in our tree
+        this->root = newNode;
+    else if(newNode->num > follower->num)
+        follower->right = newNode;
+    else
+        follower->left = newNode;
+
+    //then SPLAY
+    
 } //end insert
 
 //search method
@@ -68,12 +89,12 @@ Node* Splay::search(Node* root, int find) {
 } //end search
 
 //remove method
-Splay* Splay::insert(Splay* root, int val) {
+Node* Splay::remove(Node* root, int val) {
 
 } //end remove
 
 //display function
-void Splay::display(Splay* root){
+void Splay::display(Node* root){
     // cout << "in display" << endl;
     if(root == NULL ) {//done
         cout << "[";
