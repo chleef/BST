@@ -31,14 +31,52 @@ class Splay{
 
 };
 
+//splay function
 void Splay::splay(Node* splayNode){
     //check if it just needs a zig
-
+    while(splayNode->parent != NULL) {
     //check which of the 4 possibilities its in
+        if(splayNode->parent->parent == NULL) { //just need to zig
+            //figure out left vs right rotate
+        }
+        else if(splayNode->parent->left == splayNode && splayNode->parent->parent->left == splayNode->parent){
+            //aka case 1 zig zig from the left - need to right rotate twice
+        }
+        else if(splayNode->parent->left == splayNode && splayNode->parent->parent->right == splayNode->parent){
+            //aka case 2 zig zag - first right then left
+        }
+        else if(splayNode->parent->right == splayNode && splayNode->parent->parent->left == splayNode->parent){
+            //case 3 - zig zag first left then right
+        }
+        else if(splayNode->parent->right == splayNode && splayNode->parent->parent->right == splayNode->parent){
+            //aka case 4 zig zig from the right - need to right rotate twice
+        }
+        else {
+            cout << "oops should not be in here in splay - messed up some pointer" << endl;
+            //should not be in here
+        }
     //zig zig from left -- rotate left twice?
     //zig zag
     //zig zig from right
     //zig zag otherway
+    } //end while loop
+   
+}
+
+//rotateLeft
+void Splay::rotateLeft(Node* node){
+
+}
+
+//rotateRight
+void Splay::rotateRight(Node* node){
+    Node* oldParent = node->parent;
+    Node* leftNode = node->left;
+    node->left = leftNode->right;
+    //then change that node's parent?
+    node->right = node->parent;
+    node->parent = oldParent;
+    node->right->parent = node;
 }
 
 //default constructor
