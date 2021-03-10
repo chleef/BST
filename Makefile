@@ -9,7 +9,7 @@ SRCS = main.cc
 #SRCS = ${wildcard *.cc}
 OBJS = ${SRCS:.cc=.o}
 #INCLS = ${wildcard *.h}
-INCLS = ${SRCS:.cc=.h} main.h BST.h splay.h
+INCLS = ${SRCS:.cc=.h} main.h BST.h
 
 p2: $(OBJS)
 	$(CC) $(CFLAGS) $(OBJS) -o p2

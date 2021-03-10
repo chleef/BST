@@ -20,7 +20,7 @@ class BST {
         void display(BST*);
         void setNum(int);
         unsigned getTraversal();
-
+        void clear(BST*);
 };
 
 //default constructor
@@ -39,8 +39,10 @@ BST::BST(int num) {
 }
 
 BST::~BST() {
-    delete left;
-    delete right;
+     clear(this);
+   //delete left;
+   //delete right;
+   cout << "Deleting: " << this->num << endl;
 }
 
 //insert method
@@ -147,3 +149,24 @@ void BST::setNum(int num){
 unsigned BST::getTraversal(){
     return traversal;
 }
+
+
+void BST::clear(BST* root){
+    /*
+    if(root == NULL) {
+        return;
+    }
+    clear(root->left);
+    clear(root->right);
+
+    delete root;
+    traversal = 0;
+    */
+   if(root != NULL) {
+       clear(root->left);
+       clear(root->right);
+       cout << "deleting " << root->num << endl;
+       delete root;
+   }
+   traversal = 0;
+} //end clear

@@ -3,59 +3,62 @@
 
 using namespace std;
 
+struct Node { //not going to mess up again -- going to use a node this time
+    int num;
+    Node *parent;
+    Node *left;
+    Node *right;
+};
+
 class Splay{
     private:
-        int num;
-        Splay* left;
-        Splay* right;
+        Node* root;
         unsigned traversal;
 
     public:
         Splay();
-        Splay(int);
         ~Splay();
-        Splay* insert(Splay*, int);
-        Splay* search(Splay*, int);
-        Splay* remove(Splay*, int);
-        void display(Splay*);
+        Node* insert(Node*, int);
+        Node* search(Node*, int);
+        Node* remove(Node*, int);
+        void display(Node*);
         unsigned getTraversal();
+        void clear(Node*);
 
 };
 
 //default constructor
 Splay::Splay() {
-    num = 0;
     traversal = 0;
-    left = NULL;
-    right = NULL;
-}
-
-//parameter constructor
-Splay::Splay(int num) {
-    this->num = num;
-    traversal = 0;
-    left = NULL;
-    right = NULL;
+    root = NULL;
 }
 
 //destructor
 Splay::~Splay() {
-    delete left;
-    delete right;
+    //call clear
 }
 
 //insert method
-Splay* Splay::insert(Splay* root, int val) {
-
+Node* Splay::insert(Node* root, int val) {
+    traversal++;
+    Node* node = new Node;
+    if(!this->root){
+        //splay tree is empty
+        
+    }
 } //end insert
 
 //search method
-Splay* Splay::search(Splay* root, int find) {
+Node* Splay::search(Node* root, int find) {
     traversal++;
-    if(root == NULL)
+    if(root == NULL) {
+        //need to splay - got to the bottom
         return NULL;
-    else if(root->num == find) 
+    }
+    else if(root->num == find) {
+        //need to splay - found the node
         return root;
+    }
     else if(find > root->num) {//need to go to the right because num we're searching for is bigger
         return search(root->right, find); //recursively look at the next one
     }
