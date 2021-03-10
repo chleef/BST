@@ -1,4 +1,5 @@
 #include "BST.h"
+#include "splay.h"
 #include <fstream>
 #include <iostream>
 #include <sstream>

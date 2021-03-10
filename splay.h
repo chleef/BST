@@ -33,11 +33,16 @@ class Splay{
 
 //splay function
 void Splay::splay(Node* splayNode){
+    //cout << "inside splay" << endl;
     //check if it just needs a zig
     while(splayNode->parent != NULL) {
     //check which of the 4 possibilities its in
         if(splayNode->parent->parent == NULL) { //just need to zig
             //figure out left vs right rotate
+            if(splayNode->parent->left== splayNode)
+                rotateRight(splayNode->parent);
+            else
+                rotateLeft(splayNode->parent);
         }
         else if(splayNode->parent->left == splayNode){
             if(splayNode->parent->parent->left == splayNode->parent) {
@@ -68,7 +73,7 @@ void Splay::splay(Node* splayNode){
             //should not be in here
         }
     } //end while loop
-   
+   //cout << "done with splay" << endl;
 }
 
 //rotateLeft
@@ -128,6 +133,7 @@ Splay::~Splay() {
 
 //insert method
 void Splay::insert(int val) {
+    //cout << "inside insert" << endl;
     traversal++;
     Node* mover = this->root;
     Node* follower = NULL;
@@ -136,6 +142,7 @@ void Splay::insert(int val) {
     newNode->num = val;
     while(mover != NULL){
         //move mover down to wherever newNode should be inserted, keep follower trailing
+      //  cout << "inside while loop moving to wherever we should insert" << endl;
         follower = mover;
         if(newNode->num > mover->num){
             mover = mover->right;
@@ -145,7 +152,7 @@ void Splay::insert(int val) {
         }
     } //end while - once mover is Null we are where we want to be
     newNode->parent = follower;
-
+    //cout << "through while loop in insert" << endl;
     if(follower == NULL) //we have nothing in our tree
         this->root = newNode;
     else if(newNode->num > follower->num)
