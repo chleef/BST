@@ -55,10 +55,6 @@ void Splay::splay(Node* splayNode){
             cout << "oops should not be in here in splay - messed up some pointer" << endl;
             //should not be in here
         }
-    //zig zig from left -- rotate left twice?
-    //zig zag
-    //zig zig from right
-    //zig zag otherway
     } //end while loop
    
 }
@@ -70,13 +66,24 @@ void Splay::rotateLeft(Node* node){
 
 //rotateRight
 void Splay::rotateRight(Node* node){
+    //need to change leftNode's parent, right - and then their parent
+    //need to change node's parent, left - and then their parent
+    //need to change oldParent's right or left or neither if root
     Node* oldParent = node->parent;
     Node* leftNode = node->left;
     node->left = leftNode->right;
-    //then change that node's parent?
-    node->right = node->parent;
-    node->parent = oldParent;
-    node->right->parent = node;
+    //then change that node's parent
+    if(leftNode->right != NULL) //not sure if necessary?
+        leftNode->right->parent = node;
+    leftNode->parent = oldParent;
+    if(oldParent == NULL)
+        this->root = leftNode;
+    else if(oldParent->right == node)
+        oldParent->right = leftNode;
+    else
+        oldParent->left = leftNode;
+    leftNode->right = node;
+    node->parent = leftNode;
 }
 
 //default constructor
@@ -117,8 +124,8 @@ void Splay::insert(int val) {
     else
         follower->left = newNode;
 
-    //then SPLAY***************************************************************
-    
+    splay(newNode);
+
 } //end insert
 
 //search method
