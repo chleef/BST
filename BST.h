@@ -4,72 +4,74 @@
 
 using namespace std;
 
+struct Node { //not going to mess up again -- going to use a node this time
+    int num;
+    Node* left;
+    Node* right;
+};
+
 class BST {
     private:
-        int num;
-        BST* root;
-        BST* left;
-        BST* right;
+        Node* root;
         unsigned traversal;
+
     public:
         BST();
-        BST(int);
         ~BST();
-        BST* insert(BST*, int);
-        BST* search(BST*, int);
-        BST* remove(BST*, int);
-        void display(BST*);
-        void setNum(int);
+        void insert(int);
+        Node* search(Node*, int);
+        Node* remove(Node*, int);
+        void display(Node*);
         unsigned getTraversal();
-        void clear(BST*);
-        BST* getRoot();
+        void clear(Node*);
+        Node* getRoot();
 };
 
 //default constructor
 BST::BST() {
-    num = 0;
+    root->num = 0;
     traversal = 0;
     root = NULL;
-    left = NULL;
-    right = NULL;
-}
-
-BST::BST(int num) {
-    this->num = num;
-    traversal = 0;
-    root = NULL;
-    left = NULL;
-    right = NULL;
+    root->left = NULL;
+    root->right = NULL;
 }
 
 BST::~BST() {
      clear(this->root);
-   //delete left;
-   //delete right;
-   cout << "Deleting: " << this->num << endl;
+
 }
 
 //insert method
-BST* BST::insert(BST* root, int val) {
+void BST::insert(int val) {
     //increment traversal
     traversal++;
-    if(!root){ //tree is empty
-        //cout << "root is NULL, adding: "<< val << endl;
-        this->root = new BST(val);
-        return root;
-    }
-    else if(val > root->num) { //need to go down the right side
-        //cout << "val greater than root's, go right" << endl;
-        root->right = insert(root->right, val); //recursive call - start insert method over 
-    }
-    else {
-        //cout << "val less than root's, go left" << endl;
-        root->left = insert(root->left, val); //recursive call - start insert over down the left side
-    }
-    return root;
+    Node* mover = this->root;
+    Node* follower = NULL;
+    Node* newNode = new Node;
+    newNode->left = newNode->right = NULL;
+    newNode->num = val;
+    while(mover != NULL){
+        //move mover down to wherever newNode should be inserted, keep follower trailing
+      //  cout << "inside while loop moving to wherever we should insert" << endl;
+        follower = mover;
+        if(newNode->num > mover->num){
+            mover = mover->right;
+        }
+        else {
+            mover = mover->left;
+        }
+    } //end while - once mover is Null we are where we want to be
+
+    //cout << "through while loop in insert" << endl;
+    if(follower == NULL) //we have nothing in our tree
+        this->root = newNode;
+    else if(newNode->num > follower->num)
+        follower->right = newNode;
+    else
+        follower->left = newNode;
 }
 
-BST* BST::search(BST* root, int find) {
+Node* BST::search(Node* root, int find) {
     //once again just up here?
     traversal++;
     if(root == NULL)
@@ -84,7 +86,7 @@ BST* BST::search(BST* root, int find) {
     }
 }
 
-BST* BST::remove(BST* root, int num) {
+Node* BST::remove(Node* root, int num) {
     //assuming I increment traveral up here:
     traversal++;
     bool removingRoot = false;
@@ -116,6 +118,9 @@ BST* BST::remove(BST* root, int num) {
             
             //set the one we want to remove equal to that number
             root->num = temp->num;
+
+            if(removingRoot)
+                this->root = root;
 
             //get rid of old temp
             root->right = remove(root->right, temp->num);
@@ -150,16 +155,12 @@ void BST::display(BST* root) {
     cout << "]";
 }
 
-void BST::setNum(int num){
-    this->num = num;
-}
-
 unsigned BST::getTraversal(){
     return traversal;
 }
 
 
-void BST::clear(BST* root){
+void BST::clear(Node* root){
     /*
     if(root == NULL) {
         return;
@@ -179,6 +180,6 @@ void BST::clear(BST* root){
    traversal = 0;
 } //end clear
 
-BST* BST::getRoot(){
+Node* BST::getRoot(){
     return this->root;
 }

@@ -211,6 +211,8 @@ Node* Splay::remove(Node* root, int val) {
             root->right->parent = NULL;
         }
         //figure out what the new root should be
+        //find max of left side
+        //splay that to the top, set it to be the root
         //connect everything
 
         delete hold;

@@ -57,13 +57,12 @@ int main(int argc, char *argv[]) {
 
 
         BST tree;
-        BST* root = NULL;
         int hold;
         string holdString;
         stringstream ss;
 
         File >> hold;
-        root = tree.insert(root, hold);
+        tree.insert(tree.getRoot(), hold);
 
         getline(File, holdString);
 
@@ -75,7 +74,7 @@ int main(int argc, char *argv[]) {
             ss >> hold;
         //    cout << "hold is: " << hold << endl;
             if(hold != -1)
-                tree.insert(root, hold);
+                tree.insert(tree.getRoot(), hold);
             hold = -1;
         }
         
@@ -84,7 +83,7 @@ int main(int argc, char *argv[]) {
         getline(File, holdString);
         //cout << "holdString is now: " << holdString << endl;
         cout << "Initial tree: " << endl;
-        tree.display(root);
+        tree.display(tree.getRoot());
         cout << endl;
         
         getline(File, holdString);
@@ -97,7 +96,7 @@ int main(int argc, char *argv[]) {
             ss2 >> hold;
         //    cout << "in search while, searching for: " << hold << endl;
             if(hold != -1)
-                tree.search(root, hold);
+                tree.search(tree.getRoot(), hold);
             hold = -1;
         }
 
@@ -115,12 +114,12 @@ int main(int argc, char *argv[]) {
             ss3 >> hold;
         //    cout << "in remove while, removing: " << hold << endl;
             if(hold != -1)
-                tree.remove(root, hold);
+                tree.remove(tree.getRoot(), hold);
             hold = -1;
         }
 
         cout << "Final tree structure:" << endl;
-        tree.display(root);
+        tree.display(tree.getRoot());
         cout << endl;
 
         auto end = chrono::steady_clock::now();
