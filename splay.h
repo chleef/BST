@@ -188,8 +188,32 @@ Node* Splay::search(Node* root, int find) {
 //remove method
 Node* Splay::remove(Node* root, int val) {
     search(this->root, val);
-    if(root->num != val){
-        //val wasnt in the 
+    Node* hold;
+    if(this->root == NULL) //empty tree
+        return NULL;
+    else if(root->num != val){
+        //val wasnt in the tree
+        return root;
+    }
+    else { //val was in the tree, is now the root
+        if(root->left == NULL) {
+            hold = root;
+            this->root = root->right;
+        }
+        else {
+            root->left->parent = NULL;
+        }
+        if(root->right == NULL) {
+            hold = root;
+            this->root = root->left;
+        }
+        else {
+            root->right->parent = NULL;
+        }
+        //figure out what the new root should be
+        //connect everything
+
+        delete hold;
     }
 
 } //end remove
