@@ -128,7 +128,7 @@ Splay::Splay() {
 
 //destructor
 Splay::~Splay() {
-    //call clear
+    clear(this->root);
 }
 
 //insert method
@@ -169,10 +169,12 @@ Node* Splay::search(Node* root, int find) {
     traversal++;
     if(root == NULL) {
         //need to splay the parent?- got to the bottom
+        splay(root->parent);
         return NULL;
     }
     else if(root->num == find) {
         //need to splay - found the node
+        splay(root);
         return root;
     }
     else if(find > root->num) {//need to go to the right because num we're searching for is bigger
@@ -185,6 +187,10 @@ Node* Splay::search(Node* root, int find) {
 
 //remove method
 Node* Splay::remove(Node* root, int val) {
+    search(this->root, val);
+    if(root->num != val){
+        //val wasnt in the 
+    }
 
 } //end remove
 
@@ -214,4 +220,13 @@ unsigned Splay::getTraversal(){
 
 Node* Splay::getRoot(){
     return this->root;
+}
+
+void Splay::clear(Node* root){
+    if(root != NULL) {
+        clear(root->left);
+        clear(root->right);
+        delete root;
+    }
+    traversal = 0;
 }

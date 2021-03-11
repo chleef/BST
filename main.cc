@@ -3,6 +3,7 @@
 
 int main(int argc, char *argv[]) {
     try{
+        /*
         Splay splaytree;
 
         splaytree.insert(10);
@@ -24,10 +25,11 @@ int main(int argc, char *argv[]) {
         splaytree.display(splaytree.getRoot());
         cout << endl;
 
+        */
 
 
 
-/*
+
 /*
         BST tree;
         BST* root = NULL;
@@ -43,7 +45,7 @@ int main(int argc, char *argv[]) {
 
         tree.display(root);
         cout << endl;
-///////
+*/
         auto start = chrono::steady_clock::now();
 
         ifstream File;
@@ -125,7 +127,7 @@ int main(int argc, char *argv[]) {
 
         cout << "traversal count: " << tree.getTraversal() << endl;
         cout << "total time for program (ns): " << chrono::duration_cast<chrono::nanoseconds>(end - start).count() << endl;
-*/
+
     }
     catch(exception e){
         cout << "exception caught in main: " << e.what() << endl;
