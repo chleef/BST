@@ -39,7 +39,7 @@ void Splay::splay(Node* splayNode){
     //check which of the 4 possibilities its in
         if(splayNode->parent->parent == NULL) { //just need to zig
             //figure out left vs right rotate
-            if(splayNode->parent->left== splayNode)
+            if(splayNode->parent->left == splayNode)
                 rotateRight(splayNode->parent);
             else
                 rotateLeft(splayNode->parent);
@@ -212,6 +212,7 @@ Node* Splay::remove(Node* root, int val) {
         }
         //figure out what the new root should be
         //find max of left side
+        
         //splay that to the top, set it to be the root
         //connect everything
 

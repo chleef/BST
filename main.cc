@@ -29,23 +29,32 @@ int main(int argc, char *argv[]) {
 
 
 
-
+       
 /*
         BST tree;
-        BST* root = NULL;
 
-        root = tree.insert(root, 1);
-        for(int i = 2; i < 16; i++)
-            tree.insert(root, i);
+        //tree.insert(3);
+        tree.insert(6);
+        tree.insert(9);
+        tree.insert(3);
+        tree.insert(7);
+        tree.insert(12);
+        tree.insert(10);
+        tree.insert(14);
+        tree.insert(1);
+        tree.insert(5);
 
-        tree.display(root);
+
+        tree.display(tree.getRoot());
         cout << endl;
 
-        tree.search(root, 5);
+        tree.remove(6);
 
-        tree.display(root);
+       // cout << tree.getRoot()->num << endl;
+        tree.display(tree.getRoot());
         cout << endl;
 */
+
         auto start = chrono::steady_clock::now();
 
         ifstream File;
@@ -62,7 +71,7 @@ int main(int argc, char *argv[]) {
         stringstream ss;
 
         File >> hold;
-        tree.insert(tree.getRoot(), hold);
+        tree.insert(hold);
 
         getline(File, holdString);
 
@@ -72,9 +81,9 @@ int main(int argc, char *argv[]) {
 
         while(!ss.eof()) {
             ss >> hold;
-        //    cout << "hold is: " << hold << endl;
+          //  cout << "hold is: " << hold << endl;
             if(hold != -1)
-                tree.insert(tree.getRoot(), hold);
+                tree.insert(hold);
             hold = -1;
         }
         
@@ -94,7 +103,7 @@ int main(int argc, char *argv[]) {
 
         while(!ss2.eof()) {
             ss2 >> hold;
-        //    cout << "in search while, searching for: " << hold << endl;
+         //   cout << "in search while, searching for: " << hold << endl;
             if(hold != -1)
                 tree.search(tree.getRoot(), hold);
             hold = -1;
@@ -110,11 +119,12 @@ int main(int argc, char *argv[]) {
         stringstream ss3;
         ss3 << holdString;
         
+       // cout << "About to start removing" << endl;
         while(!ss3.eof()) {
             ss3 >> hold;
-        //    cout << "in remove while, removing: " << hold << endl;
+          //  cout << "in remove while, removing: " << hold << endl;
             if(hold != -1)
-                tree.remove(tree.getRoot(), hold);
+                tree.remove(hold);
             hold = -1;
         }
 
